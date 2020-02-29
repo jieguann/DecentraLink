@@ -129,7 +129,7 @@ function runSocket1() {
 }
 */
 function runSocket2() {
-  var socket = new WebSocket("ws://64.227.5.130:4568")
+  var socket = new WebSocket("ws://64.227.5.130:4567")
   //var socket = new WebSocket("ws://64.227.5.130:4568")
   //var socket = new WebSocket("ws://192.168.0.10:4568")
   socket.addEventListener('message', function (event) {
