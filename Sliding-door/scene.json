@@ -1,0 +1,45 @@
+{
+  "display": {
+    "title": "Deentralink",
+    "favicon": "favicon_asset"
+  },
+  "contact": {
+    "name": "",
+    "email": ""
+  },
+  "owner": "",
+  "scene": {
+    "parcels": [
+      "12,12","12,13"
+    ],
+    "base":"12,12"
+  },
+  "communications": {
+    "type": "",
+    "signalling": ""
+  },
+  "policy": {
+    "contentRating": "E",
+    "fly": true,
+    "voiceEnabled": true,
+    "blacklist": []
+  },
+  "main": "bin/game.js",
+  "tags": [],
+  "spawnPoints": [
+    {
+      "name": "spawn1",
+      "default": true,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+	  },
+	  "cameraTarget": {
+        "x": 8,
+        "y": 1,
+        "z": 8
+      }
+    }
+  ]
+}
