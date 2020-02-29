@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Decentralink</h1>
+
+<p>Click the Button to Trigger an evnet</p>
+
+<p>The Door will Open</p>
+
+<button onclick="myFunction()">Open Door</button>
+
+<p id="demo"></p>
+
+<script>
+
+function myFunction() {
+  const socket = new WebSocket('ws://64.227.5.130:4567');
+  //const socket = new WebSocket('ws://localhost:4567');
+  socket.addEventListener('open', function (event) {
+    socket.send('Hello,Server');
+});
+
+
+
+  //document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+
+</body>
+</html>
