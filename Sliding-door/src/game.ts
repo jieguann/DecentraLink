@@ -128,22 +128,67 @@ function runSocket1() {
 })
 }
 */
+
+/*
+var serverData
 function runSocket2() {
-  var socket = new WebSocket("ws://64.227.5.130:4568")
+  var socket = new WebSocket("wss://test.decentral.link:8443/send")
   //var socket = new WebSocket("ws://64.227.5.130:4568")
   //var socket = new WebSocket("ws://192.168.0.10:4568")
+  /*
   socket.addEventListener('message', function (event) {
       console.log('Message from server ', event.data)
-      if(event.data=='1'){doorParent.getComponent(utils.ToggleComponent).toggle()}
+      socket.close
+      //if(event.data=='1'){doorParent.getComponent(utils.ToggleComponent).toggle()}
   })
+
+  socket.onopen = function(e) {
+  //alert("[open] Connection established");
+  //alert("Sending to server");
+  //socket.send("My name is John");
+};
+
+socket.onmessage = function(event) {
+  console.log(`[message] Data received from server: ${event.data}`);
+  ServerData = event.data
+};
+
+socket.onclose = function(event) {
+
+};
+
+socket.onerror = function(error) {
+
+};
+
+}
+*/
+const refreshInterval: number = 1
+let refreshTimer: number = refreshInterval
+
+export class SimpleMove implements ISystem {
+  update(dt:number) {
+    //runSocket1()
+    refreshTimer -= dt
+
+    if (refreshTimer < 0) {
+      refreshTimer = refreshInterval
+    var socket = new WebSocket("wss://test.decentral.link:8443/send")
+    socket.addEventListener('message', function (event) {
+        console.log('Message from server ', event.data)
+
+        
+        //socket.close
+        if(event.data=='1'){doorParent.getComponent(utils.ToggleComponent).toggle()}
+    })
 }
 
 
-export class SimpleMove implements ISystem {
-  update() {
-    //runSocket1()
 
-    runSocket2()
+    //runSocket2()(dt * 3)
+
+    //setInterval(function(){runSocket2()},30000);
+
 
 
 
@@ -152,5 +197,7 @@ export class SimpleMove implements ISystem {
 
 engine.addSystem(new SimpleMove())
 
-
+function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 // Add system to engine
