@@ -25,10 +25,10 @@ wss1.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         data = message
         //console.log('received: %s', message);
-       
+
        console.log(data)
-  
-        
+
+
         //ws.send('reply from server : ' + message)
     });
 
@@ -38,16 +38,23 @@ wss1.on('connection', function connection(ws) {
 wss2.on('connection', function connection(ws) {
   // ...
  if(data!==null){
-  ws.send(data);
+  //ws.send(data);
+  wss2.clients.forEach(function each(client) {
+      if (client.readyState === require('ws').OPEN) {
+        client.send(data);
+
+      }
+    });
   data = null;
+  console.log("send")
 
 }
  // console.log(data)
-  
 
- 
 
- 
+
+
+
 });
 
 
@@ -67,5 +74,3 @@ httpsServer.on('upgrade', function upgrade(request, socket, head) {
     socket.destroy();
   }
 });
-
-

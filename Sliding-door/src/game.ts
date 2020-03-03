@@ -4,7 +4,7 @@ const scockeDoor
 const wall1 = new Entity()
 wall1.addComponent(
   new Transform({
-    position: new Vector3(5.75, 1, 3),
+    position: new Vector3(9.75, 1, 8),
     scale: new Vector3(1.5, 2, 0.1)
   })
 )
@@ -14,7 +14,7 @@ engine.addEntity(wall1)
 const wall2 = new Entity()
 wall2.addComponent(
   new Transform({
-    position: new Vector3(2.25, 1, 3),
+    position: new Vector3(6.25, 1, 8),
     scale: new Vector3(1.5, 2, 0.1)
   })
 )
@@ -62,10 +62,14 @@ let doorROpen = new Vector3(-1.25, 0, 0)
 const doorParent = new Entity()
 doorParent.addComponent(
   new Transform({
-    position: new Vector3(4, 1, 3)
+    //position: new Vector3(4, 1, 3)
+    position: new Vector3(8, 1, 8)
   })
 )
 
+
+
+/*
 //toggle behavior for door
 doorParent.addComponent(
   new utils.ToggleComponent(utils.ToggleState.Off, value => {
@@ -86,7 +90,7 @@ doorParent.addComponent(
     }
   })
 )
-
+*/
 engine.addEntity(doorParent)
 
 // Set the door as a child of doorPivot
@@ -177,10 +181,34 @@ export class SimpleMove implements ISystem {
     socket.addEventListener('message', function (event) {
         console.log('Message from server ', event.data)
 
-        
+
         //socket.close
-        if(event.data=='1'){doorParent.getComponent(utils.ToggleComponent).toggle()}
-    })
+        if(event.data=='1'){
+           //doorParent.getComponent(utils.ToggleComponent).toggle()}
+           doorL.addComponentOrReplace(
+             new utils.MoveTransformComponent(doorLClosed, doorLOpen, 1)
+           )
+           doorR.addComponentOrReplace(
+             new utils.MoveTransformComponent(doorRClosed, doorROpen, 1)
+           )
+    }
+
+         if(event.data=='0'){
+          doorL.addComponentOrReplace(
+            new utils.MoveTransformComponent(doorLOpen, doorLClosed, 1)
+          )
+          doorR.addComponentOrReplace(
+            new utils.MoveTransformComponent(doorROpen, doorRClosed, 1)
+          )
+
+
+
+        }
+
+
+
+
+  )
 }
 
 

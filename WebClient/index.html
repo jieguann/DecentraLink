@@ -8,14 +8,15 @@
 
 <p>The Door will Open</p>
 
-<button onclick="Door()">Open Door</button>
+<button onclick="OpenDoor()">Open Door</button>
+<button onclick="CloseDoor()">Close Door</button>
 
 
 <p id="demo"></p>
 
 <script>
 
-function Door() {
+function OpenDoor() {
   const socket = new WebSocket('wss://test.decentral.link:8443/received');
   //const socket = new WebSocket('wss://64.227.5.130:8080');
   //const socket = new WebSocket('wss://localhost/received:8080');
@@ -24,6 +25,14 @@ function Door() {
 });
 }
 
+function CloseDoor() {
+  const socket = new WebSocket('wss://test.decentral.link:8443/received');
+  //const socket = new WebSocket('wss://64.227.5.130:8080');
+  //const socket = new WebSocket('wss://localhost/received:8080');
+  socket.addEventListener('open', function (event) {
+  socket.send('0');
+});
+}
 
 
 
