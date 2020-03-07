@@ -20,13 +20,13 @@ var data=null;
 //var wss2 = new WebSocketServer({server: httpsServer});
 var wss1 = new WebSocketServer({ noServer: true });
 var wss2 = new WebSocketServer({ noServer: true });
-data = null
+
 wss1.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
         data = message
         //console.log('received: %s', message);
 
-       console.log(data)
+        console.log(data)
 
 
         //ws.send('reply from server : ' + message)
@@ -37,25 +37,59 @@ wss1.on('connection', function connection(ws) {
 
 wss2.on('connection', function connection(ws) {
   // ...
- if(data!==null){
+
   //ws.send(data);
+if(data !== null){
+  if(data == "0"){
+    wss2.clients.forEach(function each(client) {
+        if (client.readyState === require('ws').OPEN) {
+          client.send("0");
+          console.log("send 0")
+
+        }
+    });
+  }
+
+  else{
+    wss2.clients.forEach(function each(client) {
+        if (client.readyState === require('ws').OPEN) {
+          client.send("1");
+          console.log("send 1")
+
+        }
+    });
+  }
+
+  data = null;
+}
+
+
+else{
   wss2.clients.forEach(function each(client) {
       if (client.readyState === require('ws').OPEN) {
-        client.send(data);
+        client.send("nothing");
+        console.log("send nothing")
 
       }
-    });
-  data = null;
-  console.log("send")
-
+  });
 }
- // console.log(data)
 
 
+ws.on('message', function incoming(message) {
+    data = message
+    //console.log('received: %s', message);
+
+    console.log(message)
 
 
+    //ws.send('reply from server : ' + message)
+});
 
 });
+
+
+
+
 
 
 //mutiple test

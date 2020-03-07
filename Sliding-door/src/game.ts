@@ -178,6 +178,14 @@ export class SimpleMove implements ISystem {
     if (refreshTimer < 0) {
       refreshTimer = refreshInterval
     var socket = new WebSocket("wss://test.decentral.link:8443/send")
+
+
+    socket.addEventListener('open', function (event) {
+    socket.send("hello server")
+    console.log("sended")
+  })
+
+
     socket.addEventListener('message', function (event) {
         console.log('Message from server ', event.data)
 
@@ -200,15 +208,14 @@ export class SimpleMove implements ISystem {
           doorR.addComponentOrReplace(
             new utils.MoveTransformComponent(doorROpen, doorRClosed, 1)
           )
+  }
+)
 
 
 
-        }
 
 
 
-
-  )
 }
 
 
