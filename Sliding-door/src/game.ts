@@ -170,6 +170,11 @@ socket.onerror = function(error) {
 const refreshInterval: number = 1
 let refreshTimer: number = refreshInterval
 
+
+
+
+
+
 export class SimpleMove implements ISystem {
   update(dt:number) {
     //runSocket1()
@@ -177,7 +182,9 @@ export class SimpleMove implements ISystem {
 
     if (refreshTimer < 0) {
       refreshTimer = refreshInterval
-    var socket = new WebSocket("wss://test.decentral.link:8443/send")
+
+
+    var socket = new WebSocket("wss://test.decentral.link:443/send")
 
 
     socket.addEventListener('open', function (event) {
@@ -185,6 +192,10 @@ export class SimpleMove implements ISystem {
     console.log("sended")
   })
 
+
+
+
+///
 
     socket.addEventListener('message', function (event) {
         console.log('Message from server ', event.data)
@@ -216,6 +227,18 @@ export class SimpleMove implements ISystem {
 
 
 
+
+
+
+
+    }
+////
+
+
+
+
+
+
 }
 
 
@@ -229,6 +252,21 @@ export class SimpleMove implements ISystem {
 
   }
 }
+
+/////
+
+
+////Connect to WebSocket
+
+
+
+
+
+
+
+
+
+
 
 engine.addSystem(new SimpleMove())
 
