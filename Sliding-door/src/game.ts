@@ -1,3 +1,70 @@
+////ground
+const ground = new Entity()
+ground.addComponent(new BoxShape())
+ground.addComponent(
+  new Transform({
+    position:new Vector3(8,0,16),
+    scale:new Vector3(16,0.1,32)
+  })
+)
+const groundTexture = new Texture('src/materials/ground.jpg')
+const GroundMaterial = new Material()
+GroundMaterial.albedoTexture = groundTexture
+ground.addComponent(GroundMaterial)
+//enging
+engine.addEntity(ground)
+
+
+////dragon
+const dragon = new Entity()
+dragon.addComponent(new GLTFShape('src/models/dragon.gltf'))
+//dragon.addComponent(new BoxShape())
+dragon.addComponent(
+  new Transform({
+    position:new Vector3(8,0,16),
+    scale:new Vector3(10,10,10)
+  })
+)
+engine.addEntity(dragon)
+
+
+
+//Text
+
+const textDecentralinkEntity = new Entity()
+const textDecentralink = new TextShape("Decentral.link")
+textDecentralinkEntity.addComponent(textDecentralink)
+textDecentralinkEntity.addComponent(
+  new Transform({
+    position:new Vector3(8,4,8),
+    scale:new Vector3(2,2,2)
+  })
+)
+engine.addEntity(textDecentralinkEntity)
+
+
+//engine.addEntity(textDecentralinkEntity)
+////Hole 3D model
+/*
+const hole = new GLTFShape("models/soviet_star/scene.gltf")
+// Create entities
+const holeEntity = new Entity()
+holeEntity.addComponent(hole)
+holeEntity.addComponent(
+  new Transform({
+    position:new Vector3(8,0,16),
+    scale:new Vector3(16,0.1,32)
+  })
+)
+engine.addEntity(holeEntity)
+*/
+
+
+
+
+
+
+/////Door operation
 import utils from '../node_modules/decentraland-ecs-utils/index'
 const scockeDoor
 // Define fixed walls
@@ -222,55 +289,35 @@ export class SimpleMove implements ISystem {
   }
 )
 
-
-
-
-
-
-
-
-
-
     }
-////
-
-
-
-
-
 
 }
-
-
-
-    //runSocket2()(dt * 3)
-
-    //setInterval(function(){runSocket2()},30000);
-
-
-
-
-  }
 }
-
-/////
-
+}
 
 ////Connect to WebSocket
-
-
-
-
-
-
-
-
-
-
-
 engine.addSystem(new SimpleMove())
 
 function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 // Add system to engine
+
+
+//button
+const button1 = new Entity()
+button1.addComponent(new BoxShape())
+
+button1.addComponent(
+  new OnPointerDown(e => {
+    log("myEntity was clicked", e)
+  })
+)
+
+button1.addComponent(
+  new Transform({
+    position:new Vector3(8,0,5),
+    scale:new Vector3(1,1,1)
+  })
+)
+engine.addEntity(button1)

@@ -9,7 +9,7 @@ var https = require('https');
 
 //pass in your credentials to create an https server
 var httpsServer = https.createServer(credentials);
-httpsServer.listen(8443);
+httpsServer.listen(443);
 
 var WebSocketServer = require('ws').Server;
 
@@ -76,7 +76,7 @@ else{
 
 
 ws.on('message', function incoming(message) {
-    data = message
+    
     //console.log('received: %s', message);
 
     console.log(message)
